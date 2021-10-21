@@ -8,7 +8,7 @@ import java.sql.Date;
 @Setter
 public class StaffAttendanceDTO {
     private int id;
-    private int staffId;
+    private int staff_roll_number;
     private Date date;
     private String status;
 }

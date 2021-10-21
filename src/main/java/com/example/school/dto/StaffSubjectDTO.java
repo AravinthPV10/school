@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter@Setter
 public class StaffSubjectDTO {
-    private int id;
-    private int staffId;
-    private int subStdId;
+    private int staff_roll_number;
+    private int staff_id;
+    private int subject_standard_id;
 }

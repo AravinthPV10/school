@@ -1,10 +1,10 @@
 package com.example.school.service.impl;
 
-import com.example.school.dto.AttnResDTO;
+import com.example.school.dto.AttendancePercentageDTO;
 import com.example.school.dto.StaffAttendanceDTO;
 import com.example.school.entity.StaffAttendanceEntity;
 import com.example.school.mapper.StaffAttendanceMapper;
-import com.example.school.repository.AttnResRepo;
+import com.example.school.repository.AttendancePercentageRepository;
 import com.example.school.repository.StaffAttendanceRepository;
 import com.example.school.service.StaffAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class StaffAttendanceServiceImpl implements StaffAttendanceService {
     StaffAttendanceRepository staffAttendanceRepository;
 
     @Autowired
-    AttnResRepo attnResRepo;
+    AttendancePercentageRepository attendancePercentageRepository;
     @Override
-    public StaffAttendanceDTO addStaffAttn(StaffAttendanceDTO staffAttendanceDTO) {
+    public StaffAttendanceDTO addStaffAttendance(StaffAttendanceDTO staffAttendanceDTO) {
         StaffAttendanceEntity staffAttendanceEntity = new StaffAttendanceEntity();
         staffAttendanceEntity = StaffAttendanceMapper.INSTANCE.toStaffAttnEntity(staffAttendanceDTO);
         staffAttendanceEntity = staffAttendanceRepository.save(staffAttendanceEntity);
@@ -32,9 +32,11 @@ public class StaffAttendanceServiceImpl implements StaffAttendanceService {
     }
 
     @Override
-    public StaffAttendanceDTO updateStaffAttn(StaffAttendanceDTO staffAttendanceDTO) {
+    public StaffAttendanceDTO updateStaffAttendance(StaffAttendanceDTO staffAttendanceDTO) {
         StaffAttendanceEntity staffAttendance = new StaffAttendanceEntity();
         staffAttendance = staffAttendanceRepository.findById(staffAttendanceDTO.getId()).map(attendance->{
+            if(staffAttendanceDTO.getStaff_roll_number()!=0)
+                attendance.setStaff_roll_number(staffAttendanceDTO.getStaff_roll_number());
             if(staffAttendanceDTO.getDate()!=null)
                 attendance.setDate(staffAttendanceDTO.getDate());
             if(staffAttendanceDTO.getStatus()!=null)
@@ -45,26 +47,26 @@ public class StaffAttendanceServiceImpl implements StaffAttendanceService {
     }
 
     @Override
-    public String deleteStaffAttn(StaffAttendanceDTO staffAttendanceDTO) {
+    public String deleteStaffAttendance(StaffAttendanceDTO staffAttendanceDTO) {
         staffAttendanceRepository.deleteById(staffAttendanceDTO.getId());
         return "Deleted Record: "+staffAttendanceDTO.getId();
     }
 
     @Override
-    public String deleteAllStaffAttn() {
+    public String deleteAllStaffAttendance() {
         staffAttendanceRepository.deleteAll();
         return "Deleted All Records.";
     }
 
     @Override
-    public StaffAttendanceDTO showStaffAttn(StaffAttendanceDTO staffAttendanceDTO) {
+    public StaffAttendanceDTO showStaffAttendance(StaffAttendanceDTO staffAttendanceDTO) {
         StaffAttendanceEntity staffAttendance = new StaffAttendanceEntity();
         staffAttendance = staffAttendanceRepository.getById(staffAttendanceDTO.getId());
         return StaffAttendanceMapper.INSTANCE.toStaffAttnDto(staffAttendance);
     }
 
     @Override
-    public List<StaffAttendanceDTO> showAllStaffAttn() {
+    public List<StaffAttendanceDTO> showAllStaffAttendance() {
         return Optional.of(staffAttendanceRepository.findAll())
                 .orElse(Collections.emptyList())
                 .stream()
@@ -72,9 +74,9 @@ public class StaffAttendanceServiceImpl implements StaffAttendanceService {
                 .collect(Collectors.toList());
     }
     @Override
-    public AttnResDTO getStaffAttendance(int id) {
-        AttnResDTO attnResDTO = new AttnResDTO();
-        attnResDTO= attnResRepo.getStaffAttendance(id);
-        return attnResDTO;
+    public AttendancePercentageDTO getStaffAttendancePercentage(int id) {
+        AttendancePercentageDTO attendancePercentageDTO = new AttendancePercentageDTO();
+        attendancePercentageDTO = attendancePercentageRepository.getStaffAttendancePercentage(id);
+        return attendancePercentageDTO;
     }
 }

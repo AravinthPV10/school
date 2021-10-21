@@ -9,7 +9,7 @@ import java.sql.Date;
 @Getter@Setter
 public class StudentAttendancesDTO {
     private int id;
-    private int studId;
+    private int roll_number;
     private Date date;
     private String status;
 }

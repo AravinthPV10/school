@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MarksDTO {
-    private int marksId;
-    private int studId;
-    private int subjId;
+    private int marks_id;
+    private int student_id;
+    private int subject_id;
     private float marks;
 }

@@ -21,7 +21,7 @@ public class StaffController {
     @Autowired
     StaffServiceImpl staffService;
 
-    @PostMapping("/new-staff")
+    @PostMapping("/add-staff")
     public ResponseEntity<StaffDTO> addStaff(@RequestBody StaffDTO staffDTO){
 
         StaffDTO staffDTO1 = new StaffDTO();
@@ -71,48 +71,48 @@ public class StaffController {
     @Autowired
     StaffSubjectServiceImpl staffSubjectService;
 
-    @PostMapping("/new_staff_subject")
-    public ResponseEntity<StaffSubjectDTO> addStaffSub(@RequestBody StaffSubjectDTO staffSubjectDTO){
+    @PostMapping("/add_staff_subject")
+    public ResponseEntity<StaffSubjectDTO> addStaffSubject(@RequestBody StaffSubjectDTO staffSubjectDTO){
 
         StaffSubjectDTO staffSubjectDTO1 = new StaffSubjectDTO();
-        staffSubjectDTO1 = staffSubjectService.addStaffSub(staffSubjectDTO);
+        staffSubjectDTO1 = staffSubjectService.addStaffSubject(staffSubjectDTO);
         return new ResponseEntity<>(staffSubjectDTO1, HttpStatus.OK);
     }
 
     @PutMapping("/update_staff_subject")
-    public ResponseEntity<StaffSubjectDTO> updateStaffSub(@RequestBody StaffSubjectDTO staffSubjectDTO){
+    public ResponseEntity<StaffSubjectDTO> updateStaffSubject(@RequestBody StaffSubjectDTO staffSubjectDTO){
 
         StaffSubjectDTO staffSubjectDTO1 = new StaffSubjectDTO();
-        staffSubjectDTO1 = staffSubjectService.updateStaffSub(staffSubjectDTO);
+        staffSubjectDTO1 = staffSubjectService.updateStaffSubject(staffSubjectDTO);
         return new ResponseEntity<>(staffSubjectDTO1,HttpStatus.OK);
     }
 
     @DeleteMapping("/staff_subject")
-    public ResponseEntity<String> deleteStaffSub(@RequestBody StaffSubjectDTO staffSubjectDTO){
+    public ResponseEntity<String> deleteStaffSubject(@RequestBody StaffSubjectDTO staffSubjectDTO){
 
-        String message = staffSubjectService.deleteStaffSub(staffSubjectDTO);
+        String message = staffSubjectService.deleteStaffSubject(staffSubjectDTO);
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @DeleteMapping("/all_staff_subject")
-    public ResponseEntity<String> deleteAllStaffSub(){
+    public ResponseEntity<String> deleteAllStaffSubject(){
 
-        String message = staffSubjectService.deleteAllStaffSub();
+        String message = staffSubjectService.deleteAllStaffSubject();
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @GetMapping("/single-staff_subject")
-    public ResponseEntity<StaffSubjectDTO> showStaffSub(@RequestBody StaffSubjectDTO staffSubjectDTO){
+    public ResponseEntity<StaffSubjectDTO> showStaffSubject(@RequestBody StaffSubjectDTO staffSubjectDTO){
 
         StaffSubjectDTO staffSubjectDTO1 = new StaffSubjectDTO();
-        staffSubjectDTO1 = staffSubjectService.showStaffSub(staffSubjectDTO);
+        staffSubjectDTO1 = staffSubjectService.showStaffSubject(staffSubjectDTO);
         return new ResponseEntity<>(staffSubjectDTO1,HttpStatus.OK);
     }
 
     @GetMapping("/all_staff_subject")
-    public ResponseEntity<List<StaffSubjectDTO>> showAllStaffSub(){
+    public ResponseEntity<List<StaffSubjectDTO>> showAllStaffSubject(){
 
-        List<StaffSubjectDTO> StaffSubjectList = staffSubjectService.showAllStaffSub();
+        List<StaffSubjectDTO> StaffSubjectList = staffSubjectService.showAllStaffSubject();
         return new ResponseEntity<>(StaffSubjectList,HttpStatus.OK);
     }
 }

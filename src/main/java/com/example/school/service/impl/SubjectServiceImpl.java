@@ -29,9 +29,9 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectDTO updateSub(SubjectDTO subjectDTO) {
         SubjectEntity subject = new SubjectEntity();
-        subject = subjectRepository.findById(subjectDTO.getSubjId()).map(res->{
-            if(subjectDTO.getSubjName()!=null)
-                res.setSubjName(subjectDTO.getSubjName());
+        subject = subjectRepository.findById(subjectDTO.getSubject_id()).map(res->{
+            if(subjectDTO.getSubjectName()!=null)
+                res.setSubject_name(subjectDTO.getSubjectName());
             return res;
         }).get();
         return  SubjectMapper.INSTANCE.toSubDto(subject);
@@ -39,8 +39,8 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public String deleteSub(SubjectDTO subjectDTO) {
-        subjectRepository.deleteById(subjectDTO.getSubjId());
-        return "Deleted Record: "+subjectDTO.getSubjId();
+        subjectRepository.deleteById(subjectDTO.getSubject_id());
+        return "Deleted Record: "+subjectDTO.getSubject_id();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectDTO showSub(SubjectDTO subjectDTO) {
         SubjectEntity subject = new SubjectEntity();
-        subject= subjectRepository.findById(subjectDTO.getSubjId()).get();
+        subject= subjectRepository.findById(subjectDTO.getSubject_id()).get();
         return SubjectMapper.INSTANCE.toSubDto(subject);
     }
 

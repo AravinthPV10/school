@@ -30,15 +30,15 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public StaffDTO updateStaff(StaffDTO staffDTO) {
         StaffEntity s = new StaffEntity();
-        s = staffRepository.findById(staffDTO.getStaffId()).map(res->{
-            if(staffDTO.getStaffName()!=null)
-                res.setStaffName(staffDTO.getStaffName());
-            if (staffDTO.getStaffAge()!=0)
-                res.setStaffAge(staffDTO.getStaffAge());
-            if(staffDTO.getStaffPhone()!=0)
-                res.setStaffPhone(staffDTO.getStaffPhone());
-            if(staffDTO.getQual()!=null)
-                res.setQual(staffDTO.getQual());
+        s = staffRepository.findById(staffDTO.getStaff_id()).map(res->{
+            if(staffDTO.getStaff_name()!=null)
+                res.setStaff_name(staffDTO.getStaff_name());
+            if (staffDTO.getStaff_age()!=0)
+                res.setStaff_age(staffDTO.getStaff_id());
+            if(staffDTO.getStaff_phone()!=0)
+                res.setStaff_phone(staffDTO.getStaff_phone());
+            if(staffDTO.getStaff_qualification()!=null)
+                res.setStaff_qualification(staffDTO.getStaff_qualification());
             return res;
         }).get();
         return  StaffMapper.INSTANCE.toStaffDto(s);
@@ -46,8 +46,8 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String deleteStaff(StaffDTO staffDTO) {
-        staffRepository.deleteById(staffDTO.getStaffId());
-        return "Deleted Record :"+staffDTO.getStaffId();
+        staffRepository.deleteById(staffDTO.getStaff_id());
+        return "Deleted Record :"+staffDTO.getStaff_id();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public StaffDTO showStaff(StaffDTO staffDTO) {
         StaffEntity s = new StaffEntity();
-        s = staffRepository.findById(staffDTO.getStaffId()).get();
+        s = staffRepository.findById(staffDTO.getStaff_id()).get();
         return StaffMapper.INSTANCE.toStaffDto(s);
     }
 

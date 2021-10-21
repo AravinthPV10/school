@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class StandardDTO {
-    private int stdId;
-    private String stdName;
+    private int standard_id;
+    private String standard_name;
 }

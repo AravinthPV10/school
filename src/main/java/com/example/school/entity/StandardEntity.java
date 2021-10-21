@@ -12,6 +12,6 @@ import javax.persistence.*;
 public class StandardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stdId;
-    private String stdName;
+    private int standard_id;
+    private String standard_name;
 }

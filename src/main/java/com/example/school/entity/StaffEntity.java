@@ -13,9 +13,9 @@ import javax.persistence.*;
 public class StaffEntity {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private int staffId;
-    private String staffName;
-    private int staffAge;
-    private long staffPhone;
-    private String qual;
+    private int staff_id;
+    private String staff_name;
+    private int staff_age;
+    private long staff_phone;
+    private String staff_qualification;
 }

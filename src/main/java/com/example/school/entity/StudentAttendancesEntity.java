@@ -14,7 +14,7 @@ public class StudentAttendancesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int studId;
+    private int roll_number;
     private Date date;
     private String status;
 

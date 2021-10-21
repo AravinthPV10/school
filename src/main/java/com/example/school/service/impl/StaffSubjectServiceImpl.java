@@ -19,7 +19,7 @@ public class StaffSubjectServiceImpl implements StaffSubjectService {
     @Autowired
     StaffSubjectRepository staffSubjectRepository;
     @Override
-    public StaffSubjectDTO addStaffSub(StaffSubjectDTO staffSubjectDTO) {
+    public StaffSubjectDTO addStaffSubject(StaffSubjectDTO staffSubjectDTO) {
         StaffSubject staffSubject = new StaffSubject();
         staffSubject= StaffSubjectMapper.INSTANCE.toStaffSubEntity(staffSubjectDTO);
         staffSubject=staffSubjectRepository.save(staffSubject);
@@ -27,39 +27,39 @@ public class StaffSubjectServiceImpl implements StaffSubjectService {
     }
 
     @Override
-    public StaffSubjectDTO updateStaffSub(StaffSubjectDTO staffSubjectDTO) {
+    public StaffSubjectDTO updateStaffSubject(StaffSubjectDTO staffSubjectDTO) {
         StaffSubject staffSubject = new StaffSubject();
-        staffSubject = staffSubjectRepository.findById(staffSubjectDTO.getId()).map(res->{
-            if(staffSubjectDTO.getStaffId()!=0)
-                res.setStaffId(staffSubjectDTO.getStaffId());
-            if(staffSubjectDTO.getSubStdId()!=0)
-                res.setSubStdId(staffSubjectDTO.getSubStdId());
+        staffSubject = staffSubjectRepository.findById(staffSubjectDTO.getStaff_roll_number()).map(res->{
+            if(staffSubjectDTO.getStaff_id()!=0)
+                res.setStaff_id(staffSubjectDTO.getStaff_id());
+            if(staffSubjectDTO.getSubject_standard_id()!=0)
+                res.setSubject_standard_id(staffSubjectDTO.getSubject_standard_id());
             return res;
         }).get();
         return  StaffSubjectMapper.INSTANCE.toStaffSubDto(staffSubject);
     }
 
     @Override
-    public String deleteStaffSub(StaffSubjectDTO staffSubjectDTO) {
-        staffSubjectRepository.deleteById(staffSubjectDTO.getId());
-        return "Deleted Record: "+staffSubjectDTO.getId();
+    public String deleteStaffSubject(StaffSubjectDTO staffSubjectDTO) {
+        staffSubjectRepository.deleteById(staffSubjectDTO.getStaff_roll_number());
+        return "Deleted Record: "+staffSubjectDTO.getStaff_roll_number();
     }
 
     @Override
-    public String deleteAllStaffSub() {
+    public String deleteAllStaffSubject() {
         staffSubjectRepository.deleteAll();
         return "Deleted All Record.";
     }
 
     @Override
-    public StaffSubjectDTO showStaffSub(StaffSubjectDTO staffSubjectDTO) {
+    public StaffSubjectDTO showStaffSubject(StaffSubjectDTO staffSubjectDTO) {
         StaffSubject ss = new StaffSubject();
-        ss = staffSubjectRepository.getById(staffSubjectDTO.getId());
+        ss = staffSubjectRepository.getById(staffSubjectDTO.getStaff_roll_number());
         return StaffSubjectMapper.INSTANCE.toStaffSubDto(ss);
     }
 
     @Override
-    public List<StaffSubjectDTO> showAllStaffSub() {
+    public List<StaffSubjectDTO> showAllStaffSubject() {
         return Optional.of(staffSubjectRepository.findAll())
                 .orElse(Collections.emptyList())
                 .stream()

@@ -1,14 +1,16 @@
 package com.example.school.service;
 
-import com.example.school.dto.StudentStdDTO;
+import com.example.school.dto.ResultDTO;
+import com.example.school.dto.StudentStandardDTO;
 
 import java.util.List;
 
 public interface StudentStdService {
-    StudentStdDTO addStudStd(StudentStdDTO studentStdDTO);
-    StudentStdDTO updateStudStd(StudentStdDTO studentStdDTO);
-    String deleteStudStd(StudentStdDTO studentStdDTO);
+    StudentStandardDTO addStudStd(StudentStandardDTO studentStandardDTO);
+    StudentStandardDTO updateStudStd(StudentStandardDTO studentStandardDTO);
+    String deleteStudStd(StudentStandardDTO studentStandardDTO);
     String deleteAllStudStd();
-    StudentStdDTO showStudStd(StudentStdDTO studentStdDTO);
-    List<StudentStdDTO> showAllStudStd();
+    StudentStandardDTO showStudStd(StudentStandardDTO studentStandardDTO);
+    List<StudentStandardDTO> showAllStudStd();
+    List<ResultDTO> getResults();
 }

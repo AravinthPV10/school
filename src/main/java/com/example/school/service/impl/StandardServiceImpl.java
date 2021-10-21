@@ -20,7 +20,7 @@ public class StandardServiceImpl implements StandardService {
     StandardRepository standardRepository;
 
     @Override
-    public StandardDTO addStd(StandardDTO standardDTO) {
+    public StandardDTO addStandard(StandardDTO standardDTO) {
         StandardEntity s = new StandardEntity();
         s= StandardMapper.INSTANCE.toStdEntity(standardDTO);
         s = standardRepository.save(s);
@@ -28,37 +28,37 @@ public class StandardServiceImpl implements StandardService {
     }
 
     @Override
-    public StandardDTO updateStd(StandardDTO standardDTO) {
+    public StandardDTO updateStandard(StandardDTO standardDTO) {
         StandardEntity standard = new StandardEntity();
-        standard = standardRepository.findById(standardDTO.getStdId()).map(res->{
-            if(standardDTO.getStdName()!=null)
-                res.setStdName(standardDTO.getStdName());
+        standard = standardRepository.findById(standardDTO.getStandard_id()).map(res->{
+            if(standardDTO.getStandard_name()!=null)
+                res.setStandard_name(standardDTO.getStandard_name());
             return res;
         }).get();
         return  StandardMapper.INSTANCE.toStdDto(standard);
     }
 
     @Override
-    public String deleteStd(StandardDTO standardDTO) {
-        standardRepository.deleteById(standardDTO.getStdId());
-        return "Deleted Record: "+standardDTO.getStdId();
+    public String deleteStandard(StandardDTO standardDTO) {
+        standardRepository.deleteById(standardDTO.getStandard_id());
+        return "Deleted Record: "+standardDTO.getStandard_id();
     }
 
     @Override
-    public String deleteAllStd() {
+    public String deleteAllStandard() {
         standardRepository.deleteAll();
         return "Deleted All Records. ";
     }
 
     @Override
-    public StandardDTO showStd(StandardDTO standardDTO) {
+    public StandardDTO showStandard(StandardDTO standardDTO) {
         StandardEntity standard = new StandardEntity();
-        standard = standardRepository.findById(standardDTO.getStdId()).get();
+        standard = standardRepository.findById(standardDTO.getStandard_id()).get();
         return StandardMapper.INSTANCE.toStdDto(standard);
     }
 
     @Override
-    public List<StandardDTO> showAllStd() {
+    public List<StandardDTO> showAllStandard() {
         return Optional.of(standardRepository.findAll())
                 .orElse(Collections.emptyList())
                 .stream()

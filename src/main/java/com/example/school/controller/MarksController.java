@@ -19,7 +19,7 @@ public class MarksController {
     @Autowired
     MarksServiceImpl marksService;
 
-    @PostMapping("/new-marks")
+    @PostMapping("/add-marks")
     public ResponseEntity<MarksDTO> addMarks(@RequestBody MarksDTO marksDTO){
 
         MarksDTO marksDTO1 = new MarksDTO();
@@ -63,12 +63,4 @@ public class MarksController {
         return new ResponseEntity<>(marksList,HttpStatus.OK);
     }
 
-    //Generate Results//
-
-    @GetMapping("/results")
-    public ResponseEntity<List<ResultDTO>> getResults(){
-
-        List<ResultDTO> results = marksService.getResults();
-        return new ResponseEntity<>(results,HttpStatus.OK);
-    }
 }

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class StaffDTO {
-    private int staffId;
-    private String staffName;
-    private int staffAge;
-    private long staffPhone;
-    private String qual;
+    private int staff_id;
+    private String staff_name;
+    private int staff_age;
+    private long staff_phone;
+    private String staff_qualification;
 }

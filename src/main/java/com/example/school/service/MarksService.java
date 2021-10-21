@@ -15,5 +15,4 @@ public interface MarksService {
     String deleteAllMarks();
     MarksDTO showMarks(MarksDTO marksDTO);
     List<MarksDTO> showAllMarks();
-    List<ResultDTO> getResults();
 }

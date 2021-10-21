@@ -1,7 +1,7 @@
 package com.example.school.mapper;
 
-import com.example.school.dto.StudentStdDTO;
-import com.example.school.entity.StudentStd;
+import com.example.school.dto.StudentStandardDTO;
+import com.example.school.entity.StudentStandard;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -9,6 +9,6 @@ import org.mapstruct.factory.Mappers;
 public interface StudentStdMapper {
 
     StudentStdMapper INSTANCE = Mappers.getMapper(StudentStdMapper.class);
-    StudentStd toStudStdEntity(StudentStdDTO studentStdDTO);
-    StudentStdDTO toStudStdDto(StudentStd studentStd);
+    StudentStandard toStudStdEntity(StudentStandardDTO studentStandardDTO);
+    StudentStandardDTO toStudStdDto(StudentStandard studentStandard);
 }

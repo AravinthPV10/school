@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class StaffSubject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int staffId;
-    private int subStdId;
+    private int staff_roll_number;
+    private int staff_id;
+    private int subject_standard_id;
 }

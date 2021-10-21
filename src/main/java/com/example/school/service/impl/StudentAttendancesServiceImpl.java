@@ -1,10 +1,10 @@
 package com.example.school.service.impl;
 
-import com.example.school.dto.AttnResDTO;
+import com.example.school.dto.AttendancePercentageDTO;
 import com.example.school.dto.StudentAttendancesDTO;
 import com.example.school.entity.StudentAttendancesEntity;
 import com.example.school.mapper.StudentAttendancesMapper;
-import com.example.school.repository.AttnResRepo;
+import com.example.school.repository.AttendancePercentageRepository;
 import com.example.school.repository.StudentAttendancesRepository;
 import com.example.school.service.StudentAttendancesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class StudentAttendancesServiceImpl implements StudentAttendancesService 
     @Autowired
     StudentAttendancesRepository studentAttendancesRepository;
     @Autowired
-    AttnResRepo attnResRepo;
+    AttendancePercentageRepository attendancePercentageRepository;
     @Override
-    public StudentAttendancesDTO addAttn(StudentAttendancesDTO studentAttendancesDTO) {
+    public StudentAttendancesDTO addAttendance(StudentAttendancesDTO studentAttendancesDTO) {
         StudentAttendancesEntity studentAttendances = new StudentAttendancesEntity();
         studentAttendances = StudentAttendancesMapper.INSTANCE.toAttnEntity(studentAttendancesDTO);
         studentAttendances = studentAttendancesRepository.save(studentAttendances);
@@ -30,9 +30,11 @@ public class StudentAttendancesServiceImpl implements StudentAttendancesService 
     }
 
     @Override
-    public StudentAttendancesDTO updateAttn(StudentAttendancesDTO studentAttendancesDTO) {
+    public StudentAttendancesDTO updateAttendance(StudentAttendancesDTO studentAttendancesDTO) {
         StudentAttendancesEntity studentAttendances = new StudentAttendancesEntity();
         studentAttendances = studentAttendancesRepository.findById(studentAttendancesDTO.getId()).map(res->{
+            if(studentAttendancesDTO.getRoll_number()!=0)
+                res.setRoll_number(studentAttendancesDTO.getRoll_number());
             if(studentAttendancesDTO.getDate()!=null)
                 res.setDate(studentAttendancesDTO.getDate());
             if(studentAttendancesDTO.getStatus()!=null)
@@ -43,26 +45,26 @@ public class StudentAttendancesServiceImpl implements StudentAttendancesService 
     }
 
     @Override
-    public String deleteAttn(StudentAttendancesDTO studentAttendancesDTO) {
+    public String deleteAttendance(StudentAttendancesDTO studentAttendancesDTO) {
         studentAttendancesRepository.deleteById(studentAttendancesDTO.getId());
         return "Deleted Record: "+studentAttendancesDTO.getId();
     }
 
     @Override
-    public String deleteAllAttn() {
+    public String deleteAllAttendance() {
         studentAttendancesRepository.deleteAll();
         return "Deleted All Records.";
     }
 
     @Override
-    public StudentAttendancesDTO showAttn(StudentAttendancesDTO studentAttendancesDTO) {
+    public StudentAttendancesDTO showAttendance(StudentAttendancesDTO studentAttendancesDTO) {
         StudentAttendancesEntity studentAttendances = new StudentAttendancesEntity();
         studentAttendances = studentAttendancesRepository.findById(studentAttendancesDTO.getId()).get();
         return StudentAttendancesMapper.INSTANCE.toAttnDto(studentAttendances);
     }
 
     @Override
-    public List<StudentAttendancesDTO> showAllAttn() {
+    public List<StudentAttendancesDTO> showAllAttendance() {
         return Optional.of(studentAttendancesRepository.findAll())
                 .orElse(Collections.emptyList())
                 .stream()
@@ -71,10 +73,10 @@ public class StudentAttendancesServiceImpl implements StudentAttendancesService 
     }
 
     @Override
-    public AttnResDTO getStuAttendance(int id) {
-        AttnResDTO attnResDTO = new AttnResDTO();
-        attnResDTO= attnResRepo.getAttendance(id);
-        return attnResDTO;
+    public AttendancePercentageDTO getStudentAttendancePercent(int id) {
+        AttendancePercentageDTO attendancePercentageDTO = new AttendancePercentageDTO();
+        attendancePercentageDTO = attendancePercentageRepository.getStudentAttendancePercentage(id);
+        return attendancePercentageDTO;
     }
 
 }

@@ -1,12 +1,11 @@
 package com.example.school.controller;
 
 
+import com.example.school.dto.ResultDTO;
 import com.example.school.dto.StudentDTO;
-import com.example.school.dto.StudentStdDTO;
-import com.example.school.dto.SubjectStdDTO;
+import com.example.school.dto.StudentStandardDTO;
 import com.example.school.service.impl.StudentServiceImpl;
 import com.example.school.service.impl.StudentStdServiceImpl;
-import com.example.school.service.impl.SubjectStdServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class StudentController {
     @Autowired
     StudentServiceImpl studentService;
 
-    @PostMapping("/new-student")
+    @PostMapping("/add-student")
     public ResponseEntity<StudentDTO> addStudent(@RequestBody StudentDTO studentDTO){
 
         StudentDTO studentDTO1 = studentService.addStudent(studentDTO);
@@ -71,48 +70,54 @@ public class StudentController {
     @Autowired
     StudentStdServiceImpl studentStdService;
 
-    @PostMapping("/new-standard")
-    public ResponseEntity<StudentStdDTO> addStudStd(@RequestBody StudentStdDTO studentStdDTO){
+    @PostMapping("/add-standard")
+    public ResponseEntity<StudentStandardDTO> addStudentStandard(@RequestBody StudentStandardDTO studentStandardDTO){
 
-        StudentStdDTO studentStdDTO1 = new StudentStdDTO();
-        studentStdDTO1 = studentStdService.addStudStd(studentStdDTO);
-        return new ResponseEntity<>(studentStdDTO1, HttpStatus.OK);
+        StudentStandardDTO studentStandardDTO1 = new StudentStandardDTO();
+        studentStandardDTO1 = studentStdService.addStudStd(studentStandardDTO);
+        return new ResponseEntity<>(studentStandardDTO1, HttpStatus.OK);
     }
 
     @PutMapping("/update-standard")
-    public ResponseEntity<StudentStdDTO> updateStudStd(@RequestBody StudentStdDTO studentStdDTO){
+    public ResponseEntity<StudentStandardDTO> updateStudentStandard(@RequestBody StudentStandardDTO studentStandardDTO){
 
-        StudentStdDTO studentStdDTO1 = new StudentStdDTO();
-        studentStdDTO1 = studentStdService.updateStudStd(studentStdDTO);
-        return new ResponseEntity<>(studentStdDTO1,HttpStatus.OK);
+        StudentStandardDTO studentStandardDTO1 = new StudentStandardDTO();
+        studentStandardDTO1 = studentStdService.updateStudStd(studentStandardDTO);
+        return new ResponseEntity<>(studentStandardDTO1,HttpStatus.OK);
     }
 
     @DeleteMapping("/standard")
-    public ResponseEntity<String> deleteStudStd(@RequestBody StudentStdDTO studentStdDTO){
+    public ResponseEntity<String> deleteStudentStandard(@RequestBody StudentStandardDTO studentStandardDTO){
 
-        String message = studentStdService.deleteStudStd(studentStdDTO);
+        String message = studentStdService.deleteStudStd(studentStandardDTO);
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @DeleteMapping("/all-standard")
-    public ResponseEntity<String> deleteAllStudStd(){
+    public ResponseEntity<String> deleteAllStudentStandard(){
 
         String message = studentStdService.deleteAllStudStd();
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @GetMapping("/standard")
-    public ResponseEntity<StudentStdDTO> showStudStd(@RequestBody StudentStdDTO studentStdDTO){
+    public ResponseEntity<StudentStandardDTO> showStudentStandard(@RequestBody StudentStandardDTO studentStandardDTO){
 
-        StudentStdDTO studentStdDTO1 = studentStdService.showStudStd(studentStdDTO);
-        return new ResponseEntity<>(studentStdDTO1,HttpStatus.OK);
+        StudentStandardDTO studentStandardDTO1 = studentStdService.showStudStd(studentStandardDTO);
+        return new ResponseEntity<>(studentStandardDTO1,HttpStatus.OK);
     }
 
     @GetMapping("/all-standard")
-    public ResponseEntity<List<StudentStdDTO>> showAllStudStd(){
+    public ResponseEntity<List<StudentStandardDTO>> showAllStudentStandard(){
 
-        List<StudentStdDTO> studentStdDTOList = studentStdService.showAllStudStd();
-        return new ResponseEntity<>(studentStdDTOList,HttpStatus.OK);
+        List<StudentStandardDTO> studentStandardDTOList = studentStdService.showAllStudStd();
+        return new ResponseEntity<>(studentStandardDTOList,HttpStatus.OK);
+    }
+
+    @GetMapping("/results")
+    public ResponseEntity<List<ResultDTO>> showResults(){
+        List<ResultDTO> resultDTOList = studentStdService.getResults();
+        return new ResponseEntity<>(resultDTOList,HttpStatus.OK);
     }
 
 }

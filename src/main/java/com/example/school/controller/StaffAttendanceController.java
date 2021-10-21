@@ -1,6 +1,6 @@
 package com.example.school.controller;
 
-import com.example.school.dto.AttnResDTO;
+import com.example.school.dto.AttendancePercentageDTO;
 import com.example.school.dto.StaffAttendanceDTO;
 import com.example.school.service.impl.StaffAttendanceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,57 +19,57 @@ public class StaffAttendanceController {
     @Autowired
     StaffAttendanceServiceImpl staffAttendanceService;
 
-    @PostMapping("/new-attendance")
-    public ResponseEntity<StaffAttendanceDTO> addStaffAttn(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
+    @PostMapping("/add-attendance")
+    public ResponseEntity<StaffAttendanceDTO> addStaffAttendance(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
 
         StaffAttendanceDTO staffAttendanceDTO1 = new StaffAttendanceDTO();
-        staffAttendanceDTO1 = staffAttendanceService.addStaffAttn(staffAttendanceDTO);
+        staffAttendanceDTO1 = staffAttendanceService.addStaffAttendance(staffAttendanceDTO);
         return new ResponseEntity<>(staffAttendanceDTO1, HttpStatus.OK);
     }
 
     @PutMapping("/update-attendance")
-    public ResponseEntity<StaffAttendanceDTO> updateStaffAttn(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
+    public ResponseEntity<StaffAttendanceDTO> updateStaffAttendance(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
 
         StaffAttendanceDTO staffAttendanceDTO1 = new StaffAttendanceDTO();
-        staffAttendanceDTO1 = staffAttendanceService.updateStaffAttn(staffAttendanceDTO);
+        staffAttendanceDTO1 = staffAttendanceService.updateStaffAttendance(staffAttendanceDTO);
         return new ResponseEntity<>(staffAttendanceDTO1,HttpStatus.OK);
     }
 
     @DeleteMapping("/attendance")
-    public ResponseEntity<String> deleteStaffAttn(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
+    public ResponseEntity<String> deleteStaffAttendance(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
 
-        String message = staffAttendanceService.deleteStaffAttn(staffAttendanceDTO);
+        String message = staffAttendanceService.deleteStaffAttendance(staffAttendanceDTO);
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @DeleteMapping("/all-attendance")
-    public ResponseEntity<String> deleteAllStaffAttn(){
+    public ResponseEntity<String> deleteAllStaffAttendance(){
 
-        String message = staffAttendanceService.deleteAllStaffAttn();
+        String message = staffAttendanceService.deleteAllStaffAttendance();
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
     @GetMapping("/single-attendance")
-    public ResponseEntity<StaffAttendanceDTO> showStaffAttn(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
+    public ResponseEntity<StaffAttendanceDTO> showStaffAttendance(@RequestBody StaffAttendanceDTO staffAttendanceDTO){
 
-        StaffAttendanceDTO staffAttendanceDTO1 = staffAttendanceService.showStaffAttn(staffAttendanceDTO);
+        StaffAttendanceDTO staffAttendanceDTO1 = staffAttendanceService.showStaffAttendance(staffAttendanceDTO);
         return new ResponseEntity<>(staffAttendanceDTO1,HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<StaffAttendanceDTO>> showAllStaffAttn(){
+    public ResponseEntity<List<StaffAttendanceDTO>> showAllStaffAttendance(){
 
-        List<StaffAttendanceDTO> attendanceList = staffAttendanceService.showAllStaffAttn();
+        List<StaffAttendanceDTO> attendanceList = staffAttendanceService.showAllStaffAttendance();
         return new ResponseEntity<>(attendanceList,HttpStatus.OK);
     }
 
     //Staff Attendance Average//
 
     @GetMapping("/attendance-percentage/{id}")
-    public ResponseEntity<AttnResDTO> attnAvg(@PathVariable("id") int id){
+    public ResponseEntity<AttendancePercentageDTO> attendancePercentage(@PathVariable("id") int id){
 
-        AttnResDTO attendancePercentage = new AttnResDTO();
-        attendancePercentage= staffAttendanceService.getStaffAttendance(id);
+        AttendancePercentageDTO attendancePercentage = new AttendancePercentageDTO();
+        attendancePercentage= staffAttendanceService.getStaffAttendancePercentage(id);
         return new ResponseEntity<>(attendancePercentage,HttpStatus.OK);
     }
 }

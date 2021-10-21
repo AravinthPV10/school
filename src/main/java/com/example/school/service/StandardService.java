@@ -5,10 +5,10 @@ import com.example.school.dto.StandardDTO;
 import java.util.List;
 
 public interface StandardService {
-    StandardDTO addStd(StandardDTO standardDTO);
-    StandardDTO updateStd(StandardDTO standardDTO);
-    String deleteStd(StandardDTO standardDTO);
-    String deleteAllStd();
-    StandardDTO showStd(StandardDTO standardDTO);
-    List<StandardDTO> showAllStd();
+    StandardDTO addStandard(StandardDTO standardDTO);
+    StandardDTO updateStandard(StandardDTO standardDTO);
+    String deleteStandard(StandardDTO standardDTO);
+    String deleteAllStandard();
+    StandardDTO showStandard(StandardDTO standardDTO);
+    List<StandardDTO> showAllStandard();
 }

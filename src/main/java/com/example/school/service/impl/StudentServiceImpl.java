@@ -29,13 +29,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentDTO updateStudent(StudentDTO studentDTO) {
         StudentEntity student = new StudentEntity();
-        student= studentRepository.findById(studentDTO.getStudId()).map(res->{
-            if(studentDTO.getStudName()!=null)
-                res.setStudName(studentDTO.getStudName());
-            if(studentDTO.getStudAge()!=0)
-                res.setStudAge(studentDTO.getStudAge());
-            if(studentDTO.getStudPhone()!=0)
-                res.setStudPhone(studentDTO.getStudPhone());
+        student= studentRepository.findById(studentDTO.getStudent_id()).map(res->{
+            if(studentDTO.getStudent_name()!=null)
+                res.setStudent_name(studentDTO.getStudent_name());
+            if(studentDTO.getStudent_age()!=0)
+                res.setStudent_age(studentDTO.getStudent_age());
+            if(studentDTO.getStudent_phone()!=0)
+                res.setStudent_phone(studentDTO.getStudent_phone());
             return res;
         }).get();
         return StudentMapper.INSTANCE.toStudentDto(student);
@@ -43,8 +43,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String deleteStudent(StudentDTO studentDTO) {
-        studentRepository.deleteById(studentDTO.getStudId());
-        return "Deleted Record: "+studentDTO.getStudId();
+        studentRepository.deleteById(studentDTO.getStudent_id());
+        return "Deleted Record: "+studentDTO.getStudent_id();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentDTO showStudent(StudentDTO studentDTO) {
         StudentEntity student = new StudentEntity();
-        student = studentRepository.findById(studentDTO.getStudId()).get();
+        student = studentRepository.findById(studentDTO.getStudent_id()).get();
         return StudentMapper.INSTANCE.toStudentDto(student);
     }
 

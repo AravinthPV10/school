@@ -1,17 +1,12 @@
 package com.example.school.service.impl;
 
 import com.example.school.dto.MarksDTO;
-import com.example.school.dto.ResultDTO;
 import com.example.school.entity.MarksEntity;
-
 import com.example.school.mapper.MarksMapper;
-
 import com.example.school.repository.MarksRepository;
 import com.example.school.service.MarksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -36,11 +31,11 @@ public class MarksServiceImpl implements MarksService {
     @Override
     public MarksDTO updateMarks(MarksDTO marksDTO) {
         MarksEntity marks = new MarksEntity();
-        marks = marksRepository.findById(marksDTO.getMarksId()).map(mark->{
-            if(marksDTO.getStudId()!=0)
-                mark.setStudId(marksDTO.getStudId());
-            if (marksDTO.getSubjId()!=0)
-                mark.setSubjId(marksDTO.getMarksId());
+        marks = marksRepository.findById(marksDTO.getMarks_id()).map(mark->{
+            if(marksDTO.getStudent_id()!=0)
+                mark.setStudent_id(marksDTO.getStudent_id());
+            if (marksDTO.getSubject_id()!=0)
+                mark.setSubject_id(marksDTO.getSubject_id());
             if(marksDTO.getMarks()!=0)
                 mark.setMarks(marksDTO.getMarks());
             return mark;
@@ -50,8 +45,8 @@ public class MarksServiceImpl implements MarksService {
 
     @Override
     public String deleteMarks(MarksDTO marksDTO) {
-        marksRepository.deleteById(marksDTO.getMarksId());
-        return "Deleted Record: "+marksDTO.getMarksId();
+        marksRepository.deleteById(marksDTO.getMarks_id());
+        return "Deleted Record: "+marksDTO.getMarks_id();
     }
 
     @Override
@@ -63,7 +58,7 @@ public class MarksServiceImpl implements MarksService {
     @Override
     public MarksDTO showMarks(MarksDTO marksDTO) {
         MarksEntity marks = new MarksEntity();
-        marks = marksRepository.getById(marksDTO.getMarksId());
+        marks = marksRepository.getById(marksDTO.getMarks_id());
         return MarksMapper.INSTANCE.toMarksDto(marks);
     }
 
@@ -76,32 +71,4 @@ public class MarksServiceImpl implements MarksService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<ResultDTO> getResults() {
-        List<ResultDTO> resultDTOArrayList = new ArrayList<>();
-        List<MarksEntity> marksEntityList = marksRepository.findAll();
-
-
-        marksEntityList.forEach(marks->{
-            ResultDTO resultDTO = new ResultDTO();
-            String s;
-            int id = marks.getStudId();
-            double attn = marksRepository.getAttendance(id);
-            String std= marksRepository.getstuId(id);
-            String sub= marksRepository.getsubjname(marks.getSubjId());
-
-            resultDTO.setRollNo(id);
-            resultDTO.setStudName(std);
-            resultDTO.setSubjName(sub);
-            resultDTO.setMarks(marks.getMarks());
-            resultDTO.setAttendancePercentage(attn);
-            if(marks.getMarks()>45 && attn>65)
-                s="P";
-            else
-                s="F";
-            resultDTO.setStatus(s);
-            resultDTOArrayList.add(resultDTO);
-        });
-        return resultDTOArrayList;
-    }
 }

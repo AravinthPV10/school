@@ -1,14 +1,14 @@
 package com.example.school.service;
 
-import com.example.school.dto.SubjectStdDTO;
+import com.example.school.dto.SubjectStandardDTO;
 
 import java.util.List;
 
 public interface SubjectStdService {
-    SubjectStdDTO addSubStd(SubjectStdDTO subjectStdDTO);
-    SubjectStdDTO updateSubStd(SubjectStdDTO subjectStdDTO);
-    String deleteSubStd(SubjectStdDTO subjectStdDTO);
+    SubjectStandardDTO addSubStd(SubjectStandardDTO subjectStandardDTO);
+    SubjectStandardDTO updateSubStd(SubjectStandardDTO subjectStandardDTO);
+    String deleteSubStd(SubjectStandardDTO subjectStandardDTO);
     String deleteAllSubStd();
-    SubjectStdDTO showSubStd(SubjectStdDTO subjectStdDTO);
-    List<SubjectStdDTO> showAllSubStd();
+    SubjectStandardDTO showSubStd(SubjectStandardDTO subjectStandardDTO);
+    List<SubjectStandardDTO> showAllSubStd();
 }

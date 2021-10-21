@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter@Setter
-public class SubjectDTO {
+public class SubjectStandardDTO {
+
+    private int id;
     private int subject_id;
-    private String subjectName;
+    private int standard_id;
 
 }

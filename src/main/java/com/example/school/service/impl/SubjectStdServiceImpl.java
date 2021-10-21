@@ -1,7 +1,7 @@
 package com.example.school.service.impl;
 
-import com.example.school.dto.SubjectStdDTO;
-import com.example.school.entity.SubjectStd;
+import com.example.school.dto.SubjectStandardDTO;
+import com.example.school.entity.SubjectStandard;
 import com.example.school.mapper.SubjectStdMapper;
 import com.example.school.repository.SubjectStdRepository;
 import com.example.school.service.SubjectStdService;
@@ -19,30 +19,30 @@ public class SubjectStdServiceImpl implements SubjectStdService {
     SubjectStdRepository subjectStdRepository;
 
     @Override
-    public SubjectStdDTO addSubStd(SubjectStdDTO subjectStdDTO) {
-        SubjectStd subjectStd = new SubjectStd();
-        subjectStd = SubjectStdMapper.INSTANCE.toSubStdEntity(subjectStdDTO);
-        subjectStd = subjectStdRepository.save(subjectStd);
-        return SubjectStdMapper.INSTANCE.toSubStdDto(subjectStd);
+    public SubjectStandardDTO addSubStd(SubjectStandardDTO subjectStandardDTO) {
+        SubjectStandard subjectStandard = new SubjectStandard();
+        subjectStandard = SubjectStdMapper.INSTANCE.toSubStdEntity(subjectStandardDTO);
+        subjectStandard = subjectStdRepository.save(subjectStandard);
+        return SubjectStdMapper.INSTANCE.toSubStdDto(subjectStandard);
     }
 
     @Override
-    public SubjectStdDTO updateSubStd(SubjectStdDTO subjectStdDTO) {
-        SubjectStd subjectStd = new SubjectStd();
-        subjectStd = subjectStdRepository.findById(subjectStdDTO.getId()).map(res->{
-            if(subjectStdDTO.getSubjectId()!=0)
-                res.setSubjectId(subjectStdDTO.getSubjectId());
-            if(subjectStdDTO.getStandardId()!=0)
-                res.setSubjectId(subjectStdDTO.getSubjectId());
+    public SubjectStandardDTO updateSubStd(SubjectStandardDTO subjectStandardDTO) {
+        SubjectStandard subjectStandard = new SubjectStandard();
+        subjectStandard = subjectStdRepository.findById(subjectStandardDTO.getId()).map(res->{
+            if(subjectStandardDTO.getSubject_id()!=0)
+                res.setSubject_id(subjectStandardDTO.getSubject_id());
+            if(subjectStandardDTO.getStandard_id()!=0)
+                res.setStandard_id(subjectStandardDTO.getStandard_id());
             return res;
         }).get();
-        return  SubjectStdMapper.INSTANCE.toSubStdDto(subjectStd);
+        return  SubjectStdMapper.INSTANCE.toSubStdDto(subjectStandard);
     }
 
     @Override
-    public String deleteSubStd(SubjectStdDTO subjectStdDTO) {
-        subjectStdRepository.deleteById(subjectStdDTO.getId());
-        return "Deleted Record: "+subjectStdDTO.getId();
+    public String deleteSubStd(SubjectStandardDTO subjectStandardDTO) {
+        subjectStdRepository.deleteById(subjectStandardDTO.getId());
+        return "Deleted Record: "+ subjectStandardDTO.getId();
     }
 
     @Override
@@ -52,14 +52,14 @@ public class SubjectStdServiceImpl implements SubjectStdService {
     }
 
     @Override
-    public SubjectStdDTO showSubStd(SubjectStdDTO subjectStdDTO) {
-        SubjectStd subjectStd = new SubjectStd();
-        subjectStd = subjectStdRepository.getById(subjectStdDTO.getId());
-        return SubjectStdMapper.INSTANCE.toSubStdDto(subjectStd);
+    public SubjectStandardDTO showSubStd(SubjectStandardDTO subjectStandardDTO) {
+        SubjectStandard subjectStandard = new SubjectStandard();
+        subjectStandard = subjectStdRepository.getById(subjectStandardDTO.getId());
+        return SubjectStdMapper.INSTANCE.toSubStdDto(subjectStandard);
     }
 
     @Override
-    public List<SubjectStdDTO> showAllSubStd() {
+    public List<SubjectStandardDTO> showAllSubStd() {
         return Optional.of(subjectStdRepository.findAll())
                 .orElse(Collections.emptyList())
                 .stream()
